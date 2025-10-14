@@ -5,12 +5,29 @@
 [![C API Documentation](https://img.shields.io/badge/docs-C_API-blue)](doc/C_API.md)
 [![C++ API Documentation](https://img.shields.io/badge/docs-C++_API-blue)](doc/CPP_API.md)
 
+primesieve é ​​um programa de linha de comando e biblioteca C/C++ para gerar rapidamente números primos.
+É muito eficiente em termos de cache, detecta os tamanhos de cache L1 e L2 da sua CPU e aloca seu principal
+estruturas de dados de acordo. Também é multithread por padrão, usa toda a CPU disponível
+núcleos sempre que possível, ou seja, se a ordem sequencial não for necessária. primesieve
+pode gerar primos e [k-tuplets primos](https://en.wikipedia.org/wiki/Prime_k-tuple)
+até 2<sup>64</sup>.
+
 primesieve is a command-line program and C/C++ library for quickly generating prime numbers.
 It is very cache efficient, it detects your CPU's L1 & L2 cache sizes and allocates its main
 data structures accordingly. It is also multi-threaded by default, it uses all available CPU
 cores whenever possible i.e. if sequential ordering is not required. primesieve
 can generate primes and [prime k-tuplets](https://en.wikipedia.org/wiki/Prime_k-tuple)
 up to 2<sup>64</sup>.
+
+primesieve gera primos usando o segmentado
+[peneira de Eratóstenes](https://en.wikipedia.org/wiki/Sieve_of_Eratostenes) com
+[fatoração de rodas](https://en.wikipedia.org/wiki/Wheel_factorization).
+Este algoritmo tem uma complexidade de tempo de execução de $O(n\ \log\ \log\ n)$ operações e usa
+$O(\sqrt{n})$ memória. Além disso, o primesieve usa o
+[algoritmo de peneira de balde](http://sweet.ua.pt/tos/software/prime_sieve.html)
+o que melhora a eficiência do cache ao gerar números primos > 2<sup>32</sup>.
+primesieve usa 8 bytes por peneiramento primo, na prática seu uso de memória é de cerca de
+$\pi(\sqrt{n})\vezes 8$ bytes por thread.
 
 primesieve generates primes using the segmented
 [sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) with
